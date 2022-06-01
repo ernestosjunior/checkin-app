@@ -8,17 +8,18 @@ interface BaseLayoutProps {
 
 export const BaseLayout: React.FC<BaseLayoutProps> = ({ children }) => {
   const isHome = window.location.pathname === "/";
+  const isManager = window.location.pathname === "/gerenciar";
 
   const navigate = useNavigate();
 
   return (
     <section className={styles.baseLayout}>
-      {isHome && (
+      {(isHome || isManager) && (
         <p
           className={styles.buttonAdmin}
-          onClick={() => navigate("/gerenciar")}
+          onClick={() => navigate(isHome ? "/gerenciar" : "/")}
         >
-          Gerenciar
+          {isHome ? "Gerenciar" : "Check-in"}
         </p>
       )}
       <main className={styles.container}>
