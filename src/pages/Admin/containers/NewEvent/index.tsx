@@ -10,8 +10,13 @@ interface NewEventProps {
   setContainer: (state: string) => void;
 }
 
+function addMinutes(data: Date, mins: number) {
+  return new Date(data.getTime() + mins * 60000);
+}
+
 export const NewEvent: React.FC<NewEventProps> = ({ setContainer }) => {
-  const [value, onChange] = useState(new Date());
+  const [value, onChange] = useState(addMinutes(new Date(), 30));
+
   return (
     <BaseLayout>
       <section className={styles.newEvent}>
