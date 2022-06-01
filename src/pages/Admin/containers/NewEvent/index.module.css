@@ -1,0 +1,35 @@
+.newEvent {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 49px;
+}
+
+.contentInputs {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contentInputs > p {
+  all: unset;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  color: #000000;
+}
+
+.datePicker {
+  width: 296px;
+  height: 44px;
+}
+
+.datePicker > div {
+  border-radius: 8px;
+  border-color: #d9d9d9;
+}
