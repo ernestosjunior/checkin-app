@@ -42,6 +42,8 @@ export const AdminPage = () => {
 
       const res = await createEvent({ name, finishTime, ip });
 
+      console.log(res);
+
       if (!res.success)
         return toast.error("Erro ao criar o evento.", {
           position: "top-right",

@@ -10,7 +10,7 @@ export const EventPage: React.FC = () => {
   const navigate = useNavigate();
 
   const handleConfirm = async () => {
-    navigate("/checkin");
+    navigate(`/checkin/${pin}`);
   };
 
   return (
