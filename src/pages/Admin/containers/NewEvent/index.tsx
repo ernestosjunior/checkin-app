@@ -1,22 +1,27 @@
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { BaseLayout, Input, Button } from "../../../../components";
 import DateTimePicker from "react-datetime-picker";
 import { ReactComponent as Logo } from "../../../../assets/logo.svg";
 import arrow from "../../../../assets/arrowBack.svg";
-
 import styles from "./index.module.css";
 
 interface NewEventProps {
   setContainer: (state: string) => void;
+  value: Date;
+  onChange: Dispatch<SetStateAction<Date>>;
+  handleCreateEvent: () => void;
+  name: string;
+  setName: Dispatch<SetStateAction<string>>;
 }
 
-function addMinutes(data: Date, mins: number) {
-  return new Date(data.getTime() + mins * 60000);
-}
-
-export const NewEvent: React.FC<NewEventProps> = ({ setContainer }) => {
-  const [value, onChange] = useState(addMinutes(new Date(), 30));
-
+export const NewEvent: React.FC<NewEventProps> = ({
+  setContainer,
+  value,
+  onChange,
+  handleCreateEvent,
+  name,
+  setName,
+}) => {
   return (
     <BaseLayout>
       <section className={styles.newEvent}>
@@ -29,7 +34,7 @@ export const NewEvent: React.FC<NewEventProps> = ({ setContainer }) => {
         <Logo />
         <div className={styles.contentInputs}>
           <p>Nome do evento:</p>
-          <Input />
+          <Input value={name} onChange={setName} />
         </div>
         <div className={styles.contentInputs}>
           <p>Tempo limite para registrar presença:</p>
@@ -42,7 +47,7 @@ export const NewEvent: React.FC<NewEventProps> = ({ setContainer }) => {
             disableClock
           />
         </div>
-        <Button label="Confirmar" onClick={() => null} />
+        <Button label="Confirmar" onClick={() => handleCreateEvent()} />
       </section>
     </BaseLayout>
   );

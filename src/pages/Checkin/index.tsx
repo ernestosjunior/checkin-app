@@ -5,6 +5,7 @@ import styles from "./index.module.css";
 
 export const CheckinPage: React.FC = () => {
   const [pin, setPin] = useState("");
+  const [name, setName] = useState("");
 
   return (
     <BaseLayout>
@@ -12,7 +13,7 @@ export const CheckinPage: React.FC = () => {
         <Logo />
         <div className={styles.otpContainer}>
           <h1>Seu nome:</h1>
-          <Input />
+          <Input value={name} onChange={setName} />
         </div>
         <Button label="Registrar presença" onClick={() => null} />
       </section>
