@@ -7,7 +7,7 @@ export const AdminPage = () => {
   const [container, setContainer] = useState("");
 
   if (container === "newEvent") {
-    return <NewEvent />;
+    return <NewEvent setContainer={setContainer} />;
   }
 
   return (
