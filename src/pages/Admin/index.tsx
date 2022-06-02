@@ -13,7 +13,7 @@ function addMinutes(data: Date, mins: number) {
 }
 
 export const AdminPage = () => {
-  const [container, setContainer] = useState("membersList");
+  const [container, setContainer] = useState("");
   const [time, setTime] = useState(addMinutes(new Date(), 30));
   const [name, setName] = useState("");
   const [event, setEvent] = useState({});
