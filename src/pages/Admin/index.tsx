@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { BaseLayout, Button } from "../../components";
 import styles from "./index.module.css";
-import { NewEvent, CreatedEvent } from "./containers";
+import { NewEvent, CreatedEvent, MembersList } from "./containers";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
 import { ReactComponent as Success } from "../../assets/success.svg";
 import { createEvent, getIP } from "../../services/api";
@@ -13,7 +13,7 @@ function addMinutes(data: Date, mins: number) {
 }
 
 export const AdminPage = () => {
-  const [container, setContainer] = useState("");
+  const [container, setContainer] = useState("membersList");
   const [time, setTime] = useState(addMinutes(new Date(), 30));
   const [name, setName] = useState("");
   const [event, setEvent] = useState({});
@@ -86,7 +86,11 @@ export const AdminPage = () => {
   }
 
   if (container === "createdEvent") {
-    return <CreatedEvent event={event} />;
+    return <CreatedEvent event={event} setContainer={setContainer} />;
+  }
+
+  if (container === "membersList") {
+    return <MembersList setContainer={setContainer} />;
   }
 
   return (
@@ -99,7 +103,7 @@ export const AdminPage = () => {
         />
         <Button
           label="Baixar listar de presença"
-          onClick={() => setContainer("getList")}
+          onClick={() => setContainer("membersList")}
         />
       </div>
     </BaseLayout>
