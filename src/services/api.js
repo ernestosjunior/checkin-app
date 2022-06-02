@@ -30,3 +30,18 @@ export const getIP = async () => {
   const res = await axios.get("https://geolocation-db.com/json/");
   return res.data.IPv4;
 };
+
+export const getListMembers = async ({ eventPin }) => {
+  const response = await fetch(
+    `${process.env.REACT_APP_API_URL}/event/list/${eventPin}`,
+    {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        "content-type": "application/json",
+      },
+    }
+  );
+  const data = await response.json();
+  return data;
+};
