@@ -32,7 +32,7 @@ export const AdminPage = () => {
           progress: undefined,
         });
 
-      const finishTime = format(time, "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+      const finishTime = format(time, "yyyy-MM-dd HH:mm:ss.SSS");
 
       const res = await createEvent({ name, finishTime, ip });
 
