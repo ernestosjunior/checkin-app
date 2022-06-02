@@ -7,15 +7,20 @@ import { toast } from "react-toastify";
 import styles from "./index.module.css";
 import { ReactComponent as Success } from "../../assets/success.svg";
 import arrow from "../../assets/arrowBack.svg";
+import ReactLoading from "react-loading";
 
 export const CheckinPage: React.FC = () => {
+  const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [name, setName] = useState("");
   const { eventPin } = useParams();
   const navigate = useNavigate();
 
+  const nameIsValid = name && name.trim().includes(" ");
+
   const handleCheckin = async () => {
     try {
+      setLoading(true);
       const ip = await getIP();
 
       if (!ip)
@@ -55,7 +60,10 @@ export const CheckinPage: React.FC = () => {
         draggable: true,
         progress: undefined,
       });
-    } catch (error) {}
+    } catch (error) {
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (success) {
@@ -83,7 +91,22 @@ export const CheckinPage: React.FC = () => {
           <h1>Seu nome:</h1>
           <Input value={name} onChange={setName} />
         </div>
-        <Button label="Registrar presença" onClick={() => handleCheckin()} />
+        <Button
+          label={
+            !loading ? (
+              "Registrar presença"
+            ) : (
+              <ReactLoading
+                color="#FFFFFF"
+                height="unset"
+                width={"12%"}
+                type="spin"
+              />
+            )
+          }
+          onClick={() => handleCheckin()}
+          disabled={!nameIsValid || loading}
+        />
       </section>
     </BaseLayout>
   );

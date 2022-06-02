@@ -4,6 +4,7 @@ import DateTimePicker from "react-datetime-picker";
 import { ReactComponent as Logo } from "../../../../assets/logo.svg";
 import arrow from "../../../../assets/arrowBack.svg";
 import styles from "./index.module.css";
+import ReactLoading from "react-loading";
 
 interface NewEventProps {
   setContainer: (state: string) => void;
@@ -12,6 +13,7 @@ interface NewEventProps {
   handleCreateEvent: () => void;
   name: string;
   setName: Dispatch<SetStateAction<string>>;
+  loading: boolean;
 }
 
 export const NewEvent: React.FC<NewEventProps> = ({
@@ -21,6 +23,7 @@ export const NewEvent: React.FC<NewEventProps> = ({
   handleCreateEvent,
   name,
   setName,
+  loading,
 }) => {
   return (
     <BaseLayout>
@@ -47,7 +50,22 @@ export const NewEvent: React.FC<NewEventProps> = ({
             disableClock
           />
         </div>
-        <Button label="Confirmar" onClick={() => handleCreateEvent()} />
+        <Button
+          disabled={loading || !name}
+          label={
+            !loading ? (
+              "Confirmar"
+            ) : (
+              <ReactLoading
+                color="#FFFFFF"
+                height="unset"
+                width={"12%"}
+                type="spin"
+              />
+            )
+          }
+          onClick={() => handleCreateEvent()}
+        />
       </section>
     </BaseLayout>
   );

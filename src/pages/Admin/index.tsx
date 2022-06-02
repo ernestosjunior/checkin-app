@@ -13,6 +13,7 @@ function addMinutes(data: Date, mins: number) {
 }
 
 export const AdminPage = () => {
+  const [loading, setLoading] = useState({ newEvent: false });
   const [container, setContainer] = useState("");
   const [time, setTime] = useState(addMinutes(new Date(), 30));
   const [name, setName] = useState("");
@@ -20,6 +21,7 @@ export const AdminPage = () => {
 
   const handleCreateEvent = async () => {
     try {
+      setLoading((prev) => ({ ...prev, newEvent: true }));
       const ip = await getIP();
       if (!ip)
         return toast.error("Erro ao obter seu ip tente novamente.", {
@@ -58,7 +60,10 @@ export const AdminPage = () => {
         draggable: true,
         progress: undefined,
       });
-    } catch (error) {}
+    } catch (error) {
+    } finally {
+      setLoading((prev) => ({ ...prev, newEvent: false }));
+    }
   };
 
   if (container === "newEvent") {
@@ -70,6 +75,7 @@ export const AdminPage = () => {
         handleCreateEvent={handleCreateEvent}
         name={name}
         setName={setName}
+        loading={loading.newEvent}
       />
     );
   }

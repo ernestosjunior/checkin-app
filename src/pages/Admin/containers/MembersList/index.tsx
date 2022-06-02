@@ -6,6 +6,7 @@ import { getListMembers } from "../../../../services/api";
 import { toast } from "react-toastify";
 import { jsPDF } from "jspdf";
 import arrow from "../../../../assets/arrowBack.svg";
+import ReactLoading from "react-loading";
 
 interface MembersListProps {
   setContainer: (state: string) => void;
@@ -13,9 +14,11 @@ interface MembersListProps {
 
 export const MembersList: React.FC<MembersListProps> = ({ setContainer }) => {
   const [pin, setPin] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleList = async () => {
     try {
+      setLoading(true);
       const res = await getListMembers({ eventPin: pin });
 
       if (!res.success)
@@ -34,7 +37,10 @@ export const MembersList: React.FC<MembersListProps> = ({ setContainer }) => {
         doc.text(`${index + 1} . ${member.name}`, 20, 20)
       );
       doc.save(`event-${pin}.pdf`);
-    } catch (error) {}
+    } catch (error) {
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -52,9 +58,20 @@ export const MembersList: React.FC<MembersListProps> = ({ setContainer }) => {
           <InputOTP state={pin} setState={setPin} />
         </div>
         <Button
-          label="Baixar lista de presentes"
+          label={
+            !loading ? (
+              "Baixar lista de presentes"
+            ) : (
+              <ReactLoading
+                color="#FFFFFF"
+                height="unset"
+                width={"12%"}
+                type="spin"
+              />
+            )
+          }
           onClick={() => handleList()}
-          disabled={!pin}
+          disabled={!pin || loading}
         />
       </div>
     </BaseLayout>

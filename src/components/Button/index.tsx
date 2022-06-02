@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./index.module.css";
 
 interface ButtonProps {
-  label: string;
+  label: string | JSX.Element;
   onClick: () => void;
   disabled?: boolean;
 }
@@ -14,7 +14,7 @@ export const Button: React.FC<ButtonProps> = ({
 }) => {
   return (
     <button onClick={onClick} className={styles.button} disabled={disabled}>
-      {label}
+      <span>{label}</span>
     </button>
   );
 };
