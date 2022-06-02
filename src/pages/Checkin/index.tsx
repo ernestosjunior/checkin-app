@@ -31,7 +31,7 @@ export const CheckinPage: React.FC = () => {
       const res = await checkin({ name, eventPin, ip });
 
       if (!res.success)
-        return toast.error("Erro ao registrar presença. Tente novamente.", {
+        return toast.error(res.error, {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
