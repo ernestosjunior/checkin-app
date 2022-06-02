@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export const createEvent = async ({ name, finishTime, ip }) => {
   const response = await fetch(`${process.env.REACT_APP_API_URL}/event`, {
     method: "POST",
@@ -22,4 +24,9 @@ export const checkin = async ({ name, ip, eventPin }) => {
   });
   const data = await response.json();
   return data;
+};
+
+export const getIP = async () => {
+  const res = await axios.get("https://geolocation-db.com/json/");
+  return res.data.IPv4;
 };

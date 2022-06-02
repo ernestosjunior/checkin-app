@@ -4,9 +4,8 @@ import styles from "./index.module.css";
 import { NewEvent, CreatedEvent } from "./containers";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
 import { ReactComponent as Success } from "../../assets/success.svg";
-import { createEvent } from "../../services/api";
+import { createEvent, getIP } from "../../services/api";
 import { format } from "date-fns";
-import axios from "axios";
 import { toast } from "react-toastify";
 
 function addMinutes(data: Date, mins: number) {
@@ -18,11 +17,6 @@ export const AdminPage = () => {
   const [time, setTime] = useState(addMinutes(new Date(), 30));
   const [name, setName] = useState("");
   const [event, setEvent] = useState({});
-
-  const getIP = async () => {
-    const res = await axios.get("https://geolocation-db.com/json/");
-    return res.data.IPv4;
-  };
 
   const handleCreateEvent = async () => {
     try {
@@ -42,8 +36,6 @@ export const AdminPage = () => {
 
       const res = await createEvent({ name, finishTime, ip });
 
-      console.log(res);
-
       if (!res.success)
         return toast.error("Erro ao criar o evento.", {
           position: "top-right",
@@ -57,6 +49,15 @@ export const AdminPage = () => {
 
       setEvent(res.data);
       setContainer("success");
+      toast.success("Seu evento foi criado! Forneça o PIN aos participantes.", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     } catch (error) {}
   };
 
