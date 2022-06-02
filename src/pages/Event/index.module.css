@@ -6,6 +6,7 @@
   justify-content: center;
   align-items: center;
   gap: 49px;
+  position: relative;
 }
 
 .otpContainer {
@@ -24,4 +25,11 @@
   line-height: 24px;
   text-align: center;
   color: #000000;
+}
+
+.buttonBack {
+  cursor: pointer;
+  position: absolute;
+  top: 4%;
+  left: 4%;
 }

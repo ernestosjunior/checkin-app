@@ -6,6 +6,7 @@ import { getIP, checkin } from "../../services/api";
 import { toast } from "react-toastify";
 import styles from "./index.module.css";
 import { ReactComponent as Success } from "../../assets/success.svg";
+import arrow from "../../assets/arrowBack.svg";
 
 export const CheckinPage: React.FC = () => {
   const [success, setSuccess] = useState(false);
@@ -71,6 +72,12 @@ export const CheckinPage: React.FC = () => {
   return (
     <BaseLayout>
       <section className={styles.eventPage}>
+        <img
+          src={arrow}
+          className={styles.buttonBack}
+          alt="Botao de retorno"
+          onClick={() => navigate("/evento")}
+        />
         <Logo />
         <div className={styles.otpContainer}>
           <h1>Seu nome:</h1>
