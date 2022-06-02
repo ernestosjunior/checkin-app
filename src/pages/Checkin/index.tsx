@@ -13,8 +13,6 @@ export const CheckinPage: React.FC = () => {
   const { eventPin } = useParams();
   const navigate = useNavigate();
 
-  console.log(eventPin);
-
   const handleCheckin = async () => {
     try {
       const ip = await getIP();
@@ -33,7 +31,7 @@ export const CheckinPage: React.FC = () => {
       const res = await checkin({ name, eventPin, ip });
 
       if (!res.success)
-        return toast.error("Erro ao registrar presença. Teste novamente.", {
+        return toast.error("Erro ao registrar presença. Tente novamente.", {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
