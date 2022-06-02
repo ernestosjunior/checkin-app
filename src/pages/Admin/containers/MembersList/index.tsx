@@ -34,7 +34,7 @@ export const MembersList: React.FC<MembersListProps> = ({ setContainer }) => {
 
       const doc = new jsPDF();
       res.data.map((member: any, index: number) =>
-        doc.text(`${index + 1} . ${member.name}`, 20, 20)
+        doc.text(`${index + 1} . ${member.name}`, 20, (index + 1) * 10)
       );
       doc.save(`event-${pin}.pdf`);
     } catch (error) {
