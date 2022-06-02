@@ -30,8 +30,9 @@ export const CheckinPage: React.FC = () => {
 
       const res = await checkin({ name, eventPin, ip });
 
-      if (!res.success)
-        return toast.error(res.error, {
+      if (!res.success) {
+        navigate("/");
+        toast.error(res.error, {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -40,6 +41,8 @@ export const CheckinPage: React.FC = () => {
           draggable: true,
           progress: undefined,
         });
+        return null;
+      }
 
       setSuccess(true);
       toast.success("Seu presença foi registrada com sucesso!", {
