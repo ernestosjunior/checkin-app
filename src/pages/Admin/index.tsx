@@ -3,7 +3,6 @@ import { BaseLayout, Button } from "../../components";
 import styles from "./index.module.css";
 import { NewEvent, CreatedEvent, MembersList } from "./containers";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
-import { ReactComponent as Success } from "../../assets/success.svg";
 import { createEvent, getIP } from "../../services/api";
 import { format } from "date-fns";
 import { toast } from "react-toastify";
@@ -50,7 +49,7 @@ export const AdminPage = () => {
         });
 
       setEvent(res.data);
-      setContainer("success");
+      setContainer("createdEvent");
       toast.success("Seu evento foi criado! Forneça o PIN aos participantes.", {
         position: "top-right",
         autoClose: 5000,
@@ -77,17 +76,6 @@ export const AdminPage = () => {
         setName={setName}
         loading={loading.newEvent}
       />
-    );
-  }
-
-  if (container === "success") {
-    return (
-      <BaseLayout>
-        <div className={styles.success}>
-          <Success />
-          <Button label="Ok" onClick={() => setContainer("createdEvent")} />
-        </div>
-      </BaseLayout>
     );
   }
 

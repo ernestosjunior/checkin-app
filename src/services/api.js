@@ -45,3 +45,19 @@ export const getListMembers = async ({ eventPin }) => {
   const data = await response.json();
   return data;
 };
+
+export const validatePin = async ({ eventPin }) => {
+  const response = await fetch(
+    `${process.env.REACT_APP_API_URL}/event/validate`,
+    {
+      method: "POST",
+      headers: {
+        accept: "application/json",
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ eventPin }),
+    }
+  );
+  const data = await response.json();
+  return data;
+};
